@@ -21,4 +21,10 @@ public class Category {
 
     @Column(name="background_color")
     private String backgroundColor;
+
+    @Column(name="image_url")
+    private String imageUrl;
+
+    @Column(name="is_active")
+    private Boolean isActive;
 }

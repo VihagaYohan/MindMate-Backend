@@ -1,12 +1,16 @@
 package com.codenova.mindmate_backend.controllers;
 
-import com.codenova.mindmate_backend.entities.Category;
+import com.codenova.mindmate_backend.dtos.CategoryDto;
+import com.codenova.mindmate_backend.dtos.SuccessResponse;
+import com.codenova.mindmate_backend.mappers.CategoryMapper;
 import com.codenova.mindmate_backend.repositories.CategoryRepository;
+import com.codenova.mindmate_backend.services.CategoryService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -15,15 +19,64 @@ import java.util.List;
 @RequestMapping("/categories")
 public class CategoryController {
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
+    private final CategoryService categoryService;
 
+    // fetch all categories
     @GetMapping
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    public ResponseEntity<SuccessResponse<?>> getAllCategories() {
+        var categoryList = categoryService.getAllCategories();
+        var successResponse = new SuccessResponse<List<CategoryDto>>().builder()
+                .status(HttpStatus.OK.value())
+                .message("List of categories")
+                .data(categoryList)
+                .build();
+
+        return ResponseEntity.ok(successResponse);
     }
 
+    // fetch category by category id
     @GetMapping("/{id}")
-    public Category findById(@PathVariable String id){
-        var category = new Category();
-        return category;
+    public ResponseEntity<CategoryDto> getCategory(@PathVariable(name="id") Long id){
+        var categoryDto = categoryService.getCategoryById(id);
+        return ResponseEntity.ok().body(categoryDto);
+    }
+
+    // create a new category
+    @PostMapping
+    public ResponseEntity<CategoryDto> createCategory(
+           @Valid @RequestBody CategoryDto request,
+            UriComponentsBuilder uriBuilder
+    ) {
+       var categoryDto = categoryService.addCategory(request);
+
+        var uri  = uriBuilder.path("/categories/{id}").buildAndExpand(categoryDto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(categoryDto);
+    }
+
+    // update a category
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDto>updateCategory(
+            @PathVariable(name="id") Long id,
+            @Valid @RequestBody CategoryDto request
+    ) {
+        var categoryDto = categoryService.updateCategory(id, request);
+        return ResponseEntity.ok().body(categoryDto);
+    }
+
+    // delete a category
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SuccessResponse<?>> deleteCategory(
+            @PathVariable(name="id") Long id
+    ) {
+        var result = categoryService.deleteCategory(id);
+        SuccessResponse<Object> response = new SuccessResponse<>().builder()
+                .status(HttpStatus.OK.value())
+                .message(result)
+                .data(null)
+                .build();
+
+        return ResponseEntity.ok().body(response);
     }
 }
