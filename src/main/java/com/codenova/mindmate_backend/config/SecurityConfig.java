@@ -23,8 +23,8 @@ public class SecurityConfig {
                         c.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // token-based authentication
                 .csrf(c -> c.disable()) // disable CSRF
                 .authorizeHttpRequests(c -> c
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/forgot-password").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/auth/forgot-password").permitAll()
                         .requestMatchers(HttpMethod.POST,"/register").permitAll()
                         .requestMatchers("/users/**").permitAll()
                         .anyRequest().authenticated()
