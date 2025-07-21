@@ -8,6 +8,7 @@ import com.codenova.mindmate_backend.mappers.UserMapper;
 import com.codenova.mindmate_backend.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 public class UserService {
         private final UserRepository userRepository;
-        @Autowired
         private final UserMapper userMapper;
+        private final PasswordEncoder passwordEncoder;
 
         // get all users
         public Iterable<UserDto>findAll() {
@@ -43,6 +44,8 @@ public class UserService {
                         throw new DuplicateRecord("Email already exists");
                 }
                 var user = userMapper.toEntity(registerUserRequest);
+                // hash user password
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
 
                 userRepository.save(user);
                 var userDto = userMapper.toDto(user);
