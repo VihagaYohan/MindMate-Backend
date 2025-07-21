@@ -1,11 +1,14 @@
 package com.codenova.mindmate_backend.controllers;
 
 import com.codenova.mindmate_backend.dtos.LoginUserRequest;
+import com.codenova.mindmate_backend.exceptions.InvalidCredentialsException;
 import com.codenova.mindmate_backend.repositories.UserRepository;
 import com.codenova.mindmate_backend.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -14,12 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final UserRepository userRepository;
     private final AuthService authService;
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(
             @Valid @RequestBody LoginUserRequest loginUserRequest
-    ) {
-        var result = authService.loginUser(loginUserRequest);
-        return ResponseEntity.ok().build();
+    ){
+       authenticationManager.authenticate(
+               new UsernamePasswordAuthenticationToken(
+                       loginUserRequest.getEmail(),
+                       loginUserRequest.getPassword()
+               ));
+       return ResponseEntity.ok().build();
     }
 }
