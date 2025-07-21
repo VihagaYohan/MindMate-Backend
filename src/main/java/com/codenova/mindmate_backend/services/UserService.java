@@ -7,6 +7,7 @@ import com.codenova.mindmate_backend.exceptions.NoResourceException;
 import com.codenova.mindmate_backend.mappers.UserMapper;
 import com.codenova.mindmate_backend.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserService {
         private final UserRepository userRepository;
+        @Autowired
         private final UserMapper userMapper;
 
         // get all users

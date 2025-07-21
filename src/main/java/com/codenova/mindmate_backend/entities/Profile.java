@@ -36,7 +36,9 @@ public class Profile {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-   @OneToOne(mappedBy = "profile")
+    @OneToOne
+    @JoinColumn(name="id")
+    @MapsId
     private User user;
 
    @OneToOne
@@ -49,25 +51,4 @@ public class Profile {
 
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
-
-    // return full name
-    public String generateFullName() {
-        return lastName + ", " + firstName;
-    }
-
-    // generate letters for avatar
-    public String generateAvatarLetters() {
-        if(firstName != null && lastName != null) {
-            return getFirstCharacter(this.firstName) + getFirstCharacter(this.lastName);
-        } else if (firstName != null && lastName == null) {
-            return getFirstCharacter(firstName);
-        } else {
-            return getFirstCharacter(lastName);
-        }
-    }
-
-    // return first letter of name
-    public String getFirstCharacter(String input) {
-        return input.substring(0,1).toUpperCase();
-    }
 }

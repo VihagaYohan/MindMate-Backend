@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -23,15 +24,4 @@ public class User {
 
     @Column(name="password")
     private String password;
-
-    @OneToOne
-    @JoinColumn(name="id")
-    @MapsId
-    private Profile profile;
-
-    @OneToOne
-    @JoinColumn(name="id")
-    @MapsId
-    private ContactPerson contactPerson;
-
 }
