@@ -43,17 +43,4 @@ public class UserController {
                 .build();
         return ResponseEntity.ok().body(successResponse);
     }
-
-    @PostMapping
-    public ResponseEntity<SuccessResponse<?>> createUser(
-           @Valid @RequestBody RegisterUserRequest registerRequest) {
-        var userDto = userService.createUser(registerRequest);
-        var successResponse = new SuccessResponse<UserDto>().builder()
-                .status(HttpStatus.OK.value())
-                .message("User has been created")
-                .data(userDto)
-                .build();
-
-        return ResponseEntity.ok().body(successResponse);
-    }
 }

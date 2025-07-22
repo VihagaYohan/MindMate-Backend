@@ -3,9 +3,6 @@ package com.codenova.mindmate_backend.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Setter
 @Getter
 @AllArgsConstructor
@@ -24,4 +21,8 @@ public class User {
 
     @Column(name="password")
     private String password;
+
+    @Column(name="role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

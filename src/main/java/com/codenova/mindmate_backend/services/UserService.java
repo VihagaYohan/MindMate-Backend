@@ -2,6 +2,7 @@ package com.codenova.mindmate_backend.services;
 
 import com.codenova.mindmate_backend.dtos.RegisterUserRequest;
 import com.codenova.mindmate_backend.dtos.UserDto;
+import com.codenova.mindmate_backend.entities.Role;
 import com.codenova.mindmate_backend.exceptions.DuplicateRecord;
 import com.codenova.mindmate_backend.exceptions.NoResourceException;
 import com.codenova.mindmate_backend.mappers.UserMapper;
@@ -33,21 +34,6 @@ public class UserService {
                 var user = userRepository.findById(id).orElseThrow(() ->
                         new NoResourceException(String.format("User with id %s not found", id)));
 
-                var userDto = userMapper.toDto(user);
-                return userDto;
-        }
-
-        // register user
-        public UserDto createUser(RegisterUserRequest registerUserRequest) {
-                // check already existing user with same email
-                if(userRepository.existsByEmail(registerUserRequest.getEmail())) {
-                        throw new DuplicateRecord("Email already exists");
-                }
-                var user = userMapper.toEntity(registerUserRequest);
-                // hash user password
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-                userRepository.save(user);
                 var userDto = userMapper.toDto(user);
                 return userDto;
         }
