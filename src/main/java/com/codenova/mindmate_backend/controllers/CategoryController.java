@@ -1,7 +1,7 @@
 package com.codenova.mindmate_backend.controllers;
 
 import com.codenova.mindmate_backend.dtos.CategoryDto;
-import com.codenova.mindmate_backend.dtos.SuccessResponse;
+import com.codenova.mindmate_backend.dtos.responses.SuccessResponse;
 import com.codenova.mindmate_backend.mappers.CategoryMapper;
 import com.codenova.mindmate_backend.repositories.CategoryRepository;
 import com.codenova.mindmate_backend.services.CategoryService;

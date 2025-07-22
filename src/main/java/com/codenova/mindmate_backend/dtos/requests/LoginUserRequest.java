@@ -1,4 +1,4 @@
-package com.codenova.mindmate_backend.dtos;
+package com.codenova.mindmate_backend.dtos.requests;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

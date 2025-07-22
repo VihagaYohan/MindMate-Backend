@@ -1,4 +1,4 @@
-package com.codenova.mindmate_backend.dtos;
+package com.codenova.mindmate_backend.dtos.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
