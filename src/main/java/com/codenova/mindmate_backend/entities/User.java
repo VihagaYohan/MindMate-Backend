@@ -25,4 +25,13 @@ public class User {
     @Column(name="role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name="is_active")
+    private Boolean isActive;
+
+    // automatically set timestamps
+    @PrePersist
+    protected void onCreate() {
+        this.isActive = true;
+    }
 }

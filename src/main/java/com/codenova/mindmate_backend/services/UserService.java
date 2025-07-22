@@ -1,18 +1,12 @@
 package com.codenova.mindmate_backend.services;
 
-import com.codenova.mindmate_backend.dtos.RegisterUserRequest;
 import com.codenova.mindmate_backend.dtos.UserDto;
-import com.codenova.mindmate_backend.entities.Role;
-import com.codenova.mindmate_backend.exceptions.DuplicateRecord;
 import com.codenova.mindmate_backend.exceptions.NoResourceException;
 import com.codenova.mindmate_backend.mappers.UserMapper;
 import com.codenova.mindmate_backend.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor

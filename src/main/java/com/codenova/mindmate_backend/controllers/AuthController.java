@@ -2,6 +2,10 @@ package com.codenova.mindmate_backend.controllers;
 
 import com.codenova.mindmate_backend.config.JwtConfig;
 import com.codenova.mindmate_backend.dtos.*;
+import com.codenova.mindmate_backend.dtos.requests.LoginUserRequest;
+import com.codenova.mindmate_backend.dtos.requests.RegisterUserRequest;
+import com.codenova.mindmate_backend.dtos.responses.JwtResponse;
+import com.codenova.mindmate_backend.dtos.responses.SuccessResponse;
 import com.codenova.mindmate_backend.repositories.UserRepository;
 import com.codenova.mindmate_backend.services.AuthService;
 import com.codenova.mindmate_backend.services.JwtService;

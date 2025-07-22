@@ -1,16 +1,12 @@
 package com.codenova.mindmate_backend.services;
 
-import com.codenova.mindmate_backend.dtos.LoginUserRequest;
-import com.codenova.mindmate_backend.dtos.RegisterUserRequest;
+import com.codenova.mindmate_backend.dtos.requests.RegisterUserRequest;
 import com.codenova.mindmate_backend.dtos.UserDto;
 import com.codenova.mindmate_backend.entities.Role;
 import com.codenova.mindmate_backend.exceptions.DuplicateRecord;
-import com.codenova.mindmate_backend.exceptions.InvalidCredentialsException;
-import com.codenova.mindmate_backend.exceptions.NoResourceException;
 import com.codenova.mindmate_backend.mappers.UserMapper;
 import com.codenova.mindmate_backend.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -52,7 +48,9 @@ public class AuthService implements UserDetailsService {
         user.setRole(Role.USER);
         // hash user password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
+        // set user activity flag
+        user.setIsActive(true);
+        
         userRepository.save(user);
         var userDto = userMapper.toDto(user);
         return userDto;
