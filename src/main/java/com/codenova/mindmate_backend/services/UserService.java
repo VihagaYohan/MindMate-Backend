@@ -51,4 +51,13 @@ public class UserService {
                 var userDto = userMapper.toDto(user);
                 return userDto;
         }
+
+        // find user by email
+        public UserDto findUserByEmail(String email) {
+                var user = userRepository.findByEmail(email).orElseThrow(() ->
+                        new NoResourceException(String.format("User with email %s not found", email)));
+
+                var userDto = userMapper.toDto(user);
+                return userDto;
+        }
 }
