@@ -32,10 +32,6 @@ public class Profile {
     @Column(name="birth_date")
     private LocalDate birthDate;
 
-    @Column(name="role")
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
     @OneToOne
     @JoinColumn(name="id")
     @MapsId
@@ -46,9 +42,24 @@ public class Profile {
    @MapsId
    private ContactPerson contactPerson;
 
-    @Column(name="created_at")
+   @Column(name="is_active")
+   private Boolean isActive;
+
+    @Column(name="created_at", nullable=false, updatable=false)
     private LocalDateTime createdAt;
 
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
+
+    // automatically set timestamps
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

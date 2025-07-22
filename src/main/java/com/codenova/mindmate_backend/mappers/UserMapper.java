@@ -1,6 +1,6 @@
 package com.codenova.mindmate_backend.mappers;
 
-import com.codenova.mindmate_backend.dtos.RegisterUserRequest;
+import com.codenova.mindmate_backend.dtos.requests.RegisterUserRequest;
 import com.codenova.mindmate_backend.dtos.UserDto;
 import com.codenova.mindmate_backend.entities.User;
 import org.mapstruct.Mapper;

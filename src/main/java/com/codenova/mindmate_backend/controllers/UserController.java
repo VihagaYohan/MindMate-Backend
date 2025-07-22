@@ -1,12 +1,9 @@
 package com.codenova.mindmate_backend.controllers;
 
-import com.codenova.mindmate_backend.dtos.RegisterUserRequest;
-import com.codenova.mindmate_backend.dtos.SuccessResponse;
+import com.codenova.mindmate_backend.dtos.responses.SuccessResponse;
 import com.codenova.mindmate_backend.dtos.UserDto;
-import com.codenova.mindmate_backend.entities.User;
 import com.codenova.mindmate_backend.repositories.UserRepository;
 import com.codenova.mindmate_backend.services.UserService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
