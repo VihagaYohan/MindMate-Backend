@@ -17,6 +17,13 @@ public class ProfileService {
     private final ProfileMapper profileMapper;
     private final UserRepository userRepository;
 
+    // ger profile by id
+    public ProfileDto getProfileById(Long id) {
+       var profile = profileRepository.findById(id).orElse(null);
+        //orElseThrow(() -> new NoResourceException("Profile not found"));
+        return profileMapper.toDto(profile);
+    }
+
     // add new profile
     public ProfileDto createProfile(
         CreateProfileRequest profileRequest,
@@ -36,6 +43,13 @@ public class ProfileService {
         profile.setIsActive(true);
         profileRepository.save(profile);
 
+        return profileMapper.toDto(profile);
+    }
+
+    // update profile
+    public ProfileDto updateProfile(ProfileDto profileDto) {
+        var profile = profileMapper.toEntity(profileDto);
+        profileRepository.save(profile);
         return profileMapper.toDto(profile);
     }
 }

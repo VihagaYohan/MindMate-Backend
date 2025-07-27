@@ -31,4 +31,18 @@ public class ProfileController {
 
         return ResponseEntity.ok(successResponse);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SuccessResponse<?>> getProfile(
+            @PathVariable(name="id") Long id
+    ) {
+        var profileDto = profileService.getProfileById(id);
+        var successResponse = SuccessResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("Profile found")
+                .data(profileDto)
+                .build();
+
+        return ResponseEntity.ok(successResponse);
+    }
 }

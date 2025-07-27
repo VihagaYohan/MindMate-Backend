@@ -5,6 +5,8 @@ import com.codenova.mindmate_backend.entities.Gender;
 import com.codenova.mindmate_backend.entities.User;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class ProfileDto {
     private Long id;
@@ -12,5 +14,6 @@ public class ProfileDto {
     private String firstName;
     private String lastName;
     private Gender gender;
+    private LocalDate birthDate;
     private ContactPerson contactPerson;;
 }
