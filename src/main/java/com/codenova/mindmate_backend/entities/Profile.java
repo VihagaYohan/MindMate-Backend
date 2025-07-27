@@ -37,10 +37,9 @@ public class Profile {
     @MapsId
     private User user;
 
-   @OneToOne
-   @JoinColumn(name="id")
-   @MapsId
-   private ContactPerson contactPerson;
+    @OneToOne
+    @JoinColumn(name="contact_person_id")
+    private ContactPerson contactPerson;
 
    @Column(name="is_active")
    private Boolean isActive;
