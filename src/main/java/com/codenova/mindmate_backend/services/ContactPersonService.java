@@ -35,9 +35,9 @@ public class ContactPersonService {
         /*
         * check if the profile available for given user id
         * at this point most probably it's available because adding contact person occurs after creating a profile
-        * this line was added as a procedure
         * */
-        var profile = profileRepository.findById(userId).orElse(null);
+        var profile = profileRepository.findById(userId).orElseThrow(() ->
+                new NoResourceException("Profile not Found"));
 
         // save contact person
         var contactPerson = contactPersonMapper.toEntity(contactPersonDto);
