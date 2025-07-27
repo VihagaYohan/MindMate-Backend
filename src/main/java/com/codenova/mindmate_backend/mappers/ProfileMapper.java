@@ -3,6 +3,8 @@ package com.codenova.mindmate_backend.mappers;
 import com.codenova.mindmate_backend.dtos.ProfileDto;
 import com.codenova.mindmate_backend.dtos.requests.CreateProfileRequest;
 import com.codenova.mindmate_backend.entities.Profile;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

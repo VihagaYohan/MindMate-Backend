@@ -1,8 +1,6 @@
 package com.codenova.mindmate_backend.dtos;
 
-import com.codenova.mindmate_backend.entities.ContactPerson;
 import com.codenova.mindmate_backend.entities.Gender;
-import com.codenova.mindmate_backend.entities.User;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,5 +13,5 @@ public class ProfileDto {
     private String lastName;
     private Gender gender;
     private LocalDate birthDate;
-    private ContactPerson contactPerson;;
+    private ContactPersonDto contactPerson;;
 }
