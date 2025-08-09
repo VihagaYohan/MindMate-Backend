@@ -15,6 +15,20 @@ import org.springframework.web.bind.annotation.*;
 public class ContactPersonController {
     private final ContactPersonService contactPersonService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SuccessResponse<?>> getContactPersonById(
+            @PathVariable("id") Long id
+    ) {
+        var contactPersonDto = contactPersonService.getContactPerson(id);
+        new SuccessResponse<ContactPersonDto>();
+        var successResponse = SuccessResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("Contact person successfully retrieved")
+                .data(contactPersonDto)
+                .build();
+        return ResponseEntity.ok(successResponse);
+    }
+
     @PostMapping("")
     public ResponseEntity<SuccessResponse<?>>addContactPerson(
             @RequestBody ContactPersonDto request,
