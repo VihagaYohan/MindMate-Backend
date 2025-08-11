@@ -20,9 +20,11 @@ public class UserMood {
     private Long id;
 
     @Column(name="mood_level")
+    @Enumerated(EnumType.STRING)
     private MoodLevel moodLevel;
 
     @Column(name="mood_description")
+    @Enumerated(EnumType.STRING)
     private MoodType moodDescription;
 
     @Column(name="notes")

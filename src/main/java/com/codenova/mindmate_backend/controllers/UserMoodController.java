@@ -28,4 +28,32 @@ public class UserMoodController {
 
         return ResponseEntity.ok(successResponse);
     }
+
+    @GetMapping
+    public ResponseEntity<SuccessResponse<?>> getUserMoods(
+            @RequestParam(required = true, name="userId") Long userId
+    ) {
+        var userMoodList = userMoodService.getUserMoods(userId);
+        var successResponse = SuccessResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("User moods retrieved successfully")
+                .data(userMoodList)
+                .build();
+
+        return ResponseEntity.ok(successResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SuccessResponse<?>>getUserMoodById(
+            @PathVariable Long id
+    ) {
+        var userMood = userMoodService.getUserMoodById(id);
+        var successResponse = SuccessResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("User mood retrieved successfully")
+                .data(userMood)
+                .build();
+
+        return ResponseEntity.ok(successResponse);
+    }
 }

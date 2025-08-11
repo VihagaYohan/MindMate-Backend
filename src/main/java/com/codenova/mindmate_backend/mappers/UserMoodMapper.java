@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 public interface UserMoodMapper {
 
     @Mapping(target="userId", source="profile.id")
-    UserMoodDto toDto(UserMood userMood);
+    UserMoodDto toDto(UserMood userMood) ;
 
     @Mapping(target="profile.id", source="userId")
     UserMood toEntity(UserMoodDto userMoodDto);
