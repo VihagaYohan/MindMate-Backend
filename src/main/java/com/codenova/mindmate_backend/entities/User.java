@@ -3,6 +3,8 @@ package com.codenova.mindmate_backend.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @AllArgsConstructor
