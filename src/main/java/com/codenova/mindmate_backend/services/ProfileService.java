@@ -19,8 +19,9 @@ public class ProfileService {
 
     // ger profile by id
     public ProfileDto getProfileById(Long id) {
-       var profile = profileRepository.findById(id).orElse(null);
-        //orElseThrow(() -> new NoResourceException("Profile not found"));
+       var profile = profileRepository.findById(id)
+               //.orElse(null);
+               .orElseThrow(() -> new NoResourceException("Profile not found"));
         return profileMapper.toDto(profile);
     }
 
