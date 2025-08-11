@@ -46,11 +46,20 @@ public class ContactPersonService {
         contactPersonRepository.save(contactPerson);
 
         // update the profile to reference the contact person
-        if(profile != null) {
-            profile.setContactPerson(contactPerson);
+/*        if(profile != null) {
+           profile.setContactPerson(contactPerson);
+           profile.setIsActive(true);
             var profileDto = profileMapper.toDto(profile);
             profileService.updateProfile(profileDto);
-        }
+        }*/
+        return contactPersonMapper.toDto(contactPerson);
+    }
+
+    // get contact person by id
+    public ContactPersonDto getContactPerson(Long id) {
+        var contactPerson = contactPersonRepository.findById(id).orElseThrow(() ->
+                new NoResourceException("Contact Person not found"));
+
         return contactPersonMapper.toDto(contactPerson);
     }
 }

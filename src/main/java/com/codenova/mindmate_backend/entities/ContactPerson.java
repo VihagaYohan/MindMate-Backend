@@ -16,9 +16,21 @@ public class ContactPerson {
     @Column(name="id")
     private Long id;
 
+/*
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="id")
+    private User user;
+*/
+
     //@OneToOne(mappedBy = "contactPerson")
     //@JoinColumn(name="user_id", referencedColumnName = "id", unique = true)
     //private Profile profile;
+
+    @OneToOne
+    @JoinColumn(name="id")
+    @MapsId
+    private Profile profile;
 
     @Column(name="first_name")
     private String firstName;
@@ -29,8 +41,8 @@ public class ContactPerson {
     @Column(name="mobile_number")
     private String mobileNumber;
 
-    @OneToOne(mappedBy = "contactPerson")
-    private Profile profile;
+/*    @OneToOne(mappedBy = "contactPerson")
+    private Profile profile;*/
 
     @Column(name="is_active")
     private boolean isActive;

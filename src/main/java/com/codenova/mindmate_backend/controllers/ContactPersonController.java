@@ -29,4 +29,18 @@ public class ContactPersonController {
 
         return ResponseEntity.ok(successResponse);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SuccessResponse<?>> getContactPersonById(
+            @PathVariable Long id
+    ) {
+        var contactPersonDto = contactPersonService.getContactPerson(id);
+        var successResponse = SuccessResponse.builder()
+                .status(HttpStatus.OK.value())
+                .data(contactPersonDto)
+                .message("Get contact person successfully")
+                .build();
+
+        return ResponseEntity.ok(successResponse);
+    }
 }

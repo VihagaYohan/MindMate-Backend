@@ -13,5 +13,5 @@ public class ProfileDto {
     private String lastName;
     private Gender gender;
     private LocalDate birthDate;
-    private ContactPersonDto contactPerson;;
+    //private ContactPersonDto contactPerson;;
 }
