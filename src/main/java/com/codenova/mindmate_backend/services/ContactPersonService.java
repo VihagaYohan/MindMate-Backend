@@ -54,4 +54,12 @@ public class ContactPersonService {
         }*/
         return contactPersonMapper.toDto(contactPerson);
     }
+
+    // get contact person by id
+    public ContactPersonDto getContactPerson(Long id) {
+        var contactPerson = contactPersonRepository.findById(id).orElseThrow(() ->
+                new NoResourceException("Contact Person not found"));
+
+        return contactPersonMapper.toDto(contactPerson);
+    }
 }
