@@ -2,12 +2,17 @@ package com.codenova.mindmate_backend.services;
 
 import com.codenova.mindmate_backend.dtos.UserMoodDto;
 import com.codenova.mindmate_backend.dtos.requests.AddMoodRequest;
+import com.codenova.mindmate_backend.entities.UserMood;
 import com.codenova.mindmate_backend.exceptions.NoResourceException;
 import com.codenova.mindmate_backend.mappers.ProfileMapper;
 import com.codenova.mindmate_backend.mappers.UserMoodMapper;
 import com.codenova.mindmate_backend.repositories.UserMoodRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 @Service
 @AllArgsConstructor
@@ -26,11 +31,10 @@ public class UserMoodService {
     }
 
     // get moods by user id
-    public Iterable<UserMoodDto> getUserMoods(Long userId) {
-        return userMoodRepository.findAllByProfile_Id(userId)
-                .stream()
-                .map(mood -> userMoodMapper.toDto(mood) )
-                .toList();
+    public Page<UserMoodDto> getUserMoods(Long userId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        Page<UserMood> moodsPage = userMoodRepository.findAllByProfile_Id(userId, pageable);
+        return moodsPage.map(userMoodMapper::toDto);
     }
 
     // add user mood

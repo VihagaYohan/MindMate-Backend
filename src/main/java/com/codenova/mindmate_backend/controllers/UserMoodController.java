@@ -31,9 +31,11 @@ public class UserMoodController {
 
     @GetMapping
     public ResponseEntity<SuccessResponse<?>> getUserMoods(
-            @RequestParam(required = true, name="userId") Long userId
+            @RequestParam(required = true, name="userId") Long userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
     ) {
-        var userMoodList = userMoodService.getUserMoods(userId);
+        var userMoodList = userMoodService.getUserMoods(userId, page, size);
         var successResponse = SuccessResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message("User moods retrieved successfully")
